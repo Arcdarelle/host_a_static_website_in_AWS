@@ -4,4 +4,4 @@ Generally, to host static website we need somewhere to host the files so we will
 <img width="521" alt="image" src="https://github.com/Arpakathy/host_a_static_website_in_AWS/assets/108733076/55ea0d83-f6b0-442a-93cb-8ffcd045bf06">
 
 
-
+In the mean time we will automate the website deployment using GitHub Actions.
