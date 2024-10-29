@@ -80,9 +80,7 @@ data "aws_iam_policy_document" "allow_access_from_another_account" {
 resource "null_resource" "upload_files" {
 
   provisioner "local-exec"  {
-      command = <<EOT
-        aws s3 sync ${var.cp-path} s3://${aws_s3_bucket.bucket1.bucket}/ 
-      EOT
+      command = "aws s3 sync ./${var.cp-path} s3://${aws_s3_bucket.bucket1.bucket}/ --region ${var.region} --debug" 
 }
  
 depends_on = [aws_s3_bucket.bucket1 , aws_s3_bucket_policy.allow_access]
@@ -166,5 +164,5 @@ resource "aws_cloudfront_distribution" "web-distribution" {
 }
 
 output "INFO" {
-  value = "AWS Resources  has been provisioned. Go to http://${aws_cloudfront_distribution.web-distribution.domain_name}"
+  value = "AWS Resources  has been provisioned yes. Go to http://${aws_cloudfront_distribution.web-distribution.domain_name}"
 }
