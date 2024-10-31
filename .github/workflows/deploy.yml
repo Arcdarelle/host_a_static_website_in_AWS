@@ -50,13 +50,17 @@ jobs:
   hold_destroy:
     runs-on: ubuntu-latest
     needs: deploy # Wait for deploy job
-    if: ${{ github.event_name == 'workflow_dispatch' }}  
-
+    
     steps:
     - name: Await Approval to Destroy
+      id: approval
       run: |
-        echo "This is a manual hold stage for resource destruction."
-        echo "Please approve this action to proceed with destroying resources."
+          echo "Please approve the destruction of the infrastructure."
+          read -p "Type 'yes' to continue: " confirm
+          if [ "$confirm" != "yes" ]; then
+            echo "Approval denied. Exiting."
+            exit 1
+          fi
 
   destroy:
     runs-on: ubuntu-latest
